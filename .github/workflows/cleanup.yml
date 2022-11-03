@@ -1,0 +1,21 @@
+name: Cleanup PR artifacts
+on:
+  push:
+    branches: [ "device" ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run a multi-line script
+        run: |
+          find pr -type f -mtime +60 -delete
+          
+      - name: Commit & Push changes
+        uses: Andro999b/push@v1.3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}

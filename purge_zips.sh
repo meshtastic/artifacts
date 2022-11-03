@@ -4,7 +4,9 @@ date=$(date -d '90 days ago' +%Y-%m-%d)
 echo "date:${date}"
 git ls-files '*.zip' | while read path junk
 do
-  if [ "$(git log --since \"$date\" -- \"$path\" )" == "" ]; then
+  output=$(git log --since \"$date\" -- \"$path\")
+  echo "path:${path}: output:${output}:"
+  if [ "$output" == "" ]; then
     echo "Removing: $path"
     rm "$path"
   fi

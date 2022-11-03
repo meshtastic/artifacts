@@ -5,7 +5,7 @@ echo "date:${date}"
 git ls-files '*.zip' | while read path junk
 do
   output=$(git log --since \"$date\" -- \"$path\")
-  echo "path:${path}: output:${output}:"
+  #echo "path:${path}: output:${output}:"
   if [ "${output}" = "" ]; then
     echo "Removing: $path"
     rm "$path"

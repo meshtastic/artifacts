@@ -5,9 +5,11 @@ echo "date:${date}"
 git ls-files '*.zip' | while read path junk
 do
   output=$(git log --since \"$date\" -- \"$path\")
-  #echo "path:${path}: output:${output}:"
-  if [ "${output}" = "" ]; then
+  echo "path:${path}: output:${output}:"
+  # If there is output, then the file has been created
+  # within the window, so do not remove those.
+  if [ "${output}" != "" ]; then
     echo "Removing: $path"
-    rm "$path"
+    #rm "$path"
   fi
 done

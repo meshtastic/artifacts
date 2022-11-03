@@ -1,6 +1,6 @@
 #!/bin/sh
 # Use git to find and remove all .zip files that are older than 90 days
-date=$(date -v -90d +%Y-%m-%d)
+date=$(date -d '90 days ago' +%Y-%m-%d)
 echo "date:${date}"
 git ls-files '*.zip' | while read path
 do
